@@ -5,6 +5,7 @@ import { Phantom } from 'web3-react-phantom'
 
 const phantom = initializeConnector<Phantom>((actions) => new Phantom({ actions }))
 
+
 const connectors: [Connector, Web3ReactHooks, Web3ReactStore][] = [phantom]
 
 export default connectors

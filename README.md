@@ -1,3 +1,10 @@
+# Install
+
+## Get the following tools
+1. Solana CLI & spl-token-cli
+2. Node.js
+3. Yarn
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

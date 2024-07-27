@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { Web3ReactSelectedHooks } from '@web3-react/core'
 import { Connector } from '@web3-react/types'
-import PhantomSVG from "../assets/phantom_wallet.svg?react"
 
 export default function Card({connector, hooks, name}: {connector: Connector, hooks: Web3ReactSelectedHooks, name: string}) {
   const {useSelectedAccount, useSelectedChainId, useSelectedIsActive, useSelectedIsActivating } = hooks
@@ -26,7 +25,7 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
     }
     else if (!isActivating) {
       setConnectionStatus('Connecting..')
-        Promise.resolve(connector.activate(1))
+      Promise.resolve(connector.activate(0))
         .catch((e) => {
           connector.resetState()
           setError(e)
@@ -43,22 +42,18 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
   ,[isActive])
 
   return (
-    <div className='flex flex-row items-center w-full'>
+    <div className="flex flex-col items-center gap-3 mt-10">
 
-      <PhantomSVG className='m-auto rounded-xl'/>
+    <p className='text-2xl font-bold'>{name.toUpperCase()}</p>
+    <h4 className='text-lg overflow-x-hidden'>Status: {(error?.message) ? ("Error: " + error.message) : connectionStatus}</h4>
+    <h4 className='text-lg overflow-x-hidden' style={{ maxWidth: '200px', textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}>Address: {account ? account : "No Account Detected"}</h4>
+    <h4 className='text-lg overflow-x-hidden'>ChainId:  {chain ? chain : 'N/A'}</h4>
 
-      <div className='flex flex-col items-left p-3 m-auto'>
-        
-        <p>{name.toUpperCase()}</p>
-        <h4 className='max-w-52 overflow-x-hidden'>Status - {(error?.message) ? ("Error: " + error.message) : connectionStatus}</h4>
-        <h4 className='max-w-52 overflow-x-hidden'>Address - {account ? account : "No Account Detected"}</h4>
-        <h4 className='max-w-52 overflow-x-hidden'>ChainId -  {chain ? chain : 'No Chain Connected'}</h4>
-        <button onClick={handleToggleConnect} disabled={false} className='bg-blue-500 text-white p-2 rounded-lg w-1/2 text-sm'>
-          {isActive ? "Disconnect" : "Connect"}
-        </button>
 
-      </div>
-      
-    </div>
+    <button onClick={handleToggleConnect} disabled={false} className='bg-blue-500 text-white rounded-lg text-sm w-1/3 p-2'>
+      {isActive ? "Disconnect" : "Connect"}
+    </button>
+
+  </div>
   )
 }
