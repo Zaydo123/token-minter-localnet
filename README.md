@@ -1,6 +1,7 @@
-# Install
+# Solana: Raydium and Openbook Minting Devtool ---> IN PROGRESS 
 
-## Get the following tools
+## Install
+### Tools
 1. Solana CLI & spl-token-cli
 2. Node.js
 3. Yarn
